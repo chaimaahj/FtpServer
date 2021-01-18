@@ -1,6 +1,7 @@
 package Server;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ public class FtpServer {
 	private int port = 1075;
 	OutputStream out;
 	
+	
 	public FtpServer()
 	{
 		try{
@@ -23,10 +25,27 @@ public class FtpServer {
 			out=con.getOutputStream() ;
 			DataOutputStream dos = new DataOutputStream(out);
 			dos.writeBytes("220 Service ready\r\n");
+			//écouter sur le port 1075
 			InputStream is = con.getInputStream(); 
 			InputStreamReader isr = new InputStreamReader(is);
 	        BufferedReader br = new BufferedReader(isr);
 	        String str = br.readLine();
+	        
+	        InputStream in = con.getInputStream();
+	        DataInputStream dis= new DataInputStream(in);
+	        while (true)
+	        {
+				String m= dis.readLine();
+				if (m.equals("USER chaimaa"))
+				{
+					dos.writeBytes("331 USER name ok \r\n");
+				}
+				if (m.equals("PASS AZERTY"))
+				{
+					dos.writeBytes("230 USER logged in \r\n");
+				}
+	        	System.out.println(m);
+	         }
 			
 		}catch(IOException e)
 		{
