@@ -3,6 +3,7 @@ package Server;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,14 +34,17 @@ public class FtpServer {
 	        
 	        InputStream in = con.getInputStream();
 	        DataInputStream dis= new DataInputStream(in);
+	        String user= "chaimaa";
+        	String pass= "123";
 	        while (true)
 	        {
+	        	
 				String m= dis.readLine();
-				if (m.equals("USER chaimaa"))
+				if (m.equals(user))
 				{
 					dos.writeBytes("331 USER name ok \r\n");
 				}
-				if (m.equals("PASS AZERTY"))
+				if (m.equals(pass))
 				{
 					dos.writeBytes("230 USER logged in \r\n");
 				}
