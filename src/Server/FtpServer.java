@@ -48,7 +48,7 @@ public class FtpServer {
 	        String str = br.readLine();
 	        InputStream in = con.getInputStream();
 	        DataInputStream dis= new DataInputStream(in);
-	        	        	
+	        	//ça marche toujours pas la partie USER et PASS j'ai supprimé tout et j'ai essayé de faire ce que vous m'avez recommendé        	
 	         if(str.equals("chaimaa"))
 	        	{
 	        		dos.writeBytes("331 Username OK\r\n");
