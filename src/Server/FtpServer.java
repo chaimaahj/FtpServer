@@ -34,6 +34,9 @@ public class FtpServer {
 	{
 		try{
 			firstSocket = new ServerSocket(port);
+			while(true)
+	        {
+
 			con = firstSocket.accept();
 			out=con.getOutputStream() ;
 			DataOutputStream dos = new DataOutputStream(out);
@@ -45,13 +48,12 @@ public class FtpServer {
 	        String str = br.readLine();
 	        InputStream in = con.getInputStream();
 	        DataInputStream dis= new DataInputStream(in);
-	        while(true)
-	        {
-	        	if(str.equals("chaimaa"))
+	        	        	
+	         if(str.equals("chaimaa"))
 	        	{
 	        		dos.writeBytes("331 Username OK\r\n");
 	        	}
-	        	if(str.equals("azerty"))
+	        if(str.equals("azerty"))
 	        	{
 	        		dos.writeBytes("230 User logged in\r\n");
 	        	}
