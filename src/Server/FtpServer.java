@@ -18,12 +18,12 @@ import java.util.Scanner;
 
 
 
-public class FtpServer {
+public class FtpServer extends Thread {
 	
 	private ServerSocket firstSocket;
 	private BufferedReader br;
 	private PrintWriter p;
-	private int port = 1076;
+	private int port = 1075;
 	private OutputStream out;
 	private Socket con;
 	
@@ -34,8 +34,7 @@ public class FtpServer {
 	{
 		try{
 			firstSocket = new ServerSocket(port);
-			while(true)
-	        {
+			
 
 			con = firstSocket.accept();
 			out=con.getOutputStream() ;
@@ -44,19 +43,29 @@ public class FtpServer {
 			//écouter sur le port 1075
 			InputStream is = con.getInputStream(); 
 			InputStreamReader isr = new InputStreamReader(is);
-	         br = new BufferedReader(isr);
-	        String str = br.readLine();
+	        br = new BufferedReader(isr);
 	        InputStream in = con.getInputStream();
 	        DataInputStream dis= new DataInputStream(in);
-	        	//ça marche toujours pas la partie USER et PASS j'ai supprimé tout et j'ai essayé de faire ce que vous m'avez recommendé        	
-	         if(str.equals("chaimaa"))
-	        	{
-	        		dos.writeBytes("331 Username OK\r\n");
-	        	}
-	        if(str.equals("azerty"))
-	        	{
-	        		dos.writeBytes("230 User logged in\r\n");
-	        	}
+	        String user= "chaimaa";
+        	String pass= "123";
+        	String res=" ";
+        	String str = br.readLine();
+	        while (true)
+	        {
+	        	
+
+				if (str.equals("USER "+user))
+				{
+					dos.writeBytes("331 USER name ok \r\n");
+				}
+				if (str.equals("PASS "+pass))
+				{
+					dos.writeBytes("230 USER logged in \r\n");
+				}
+	        	System.out.println(str);
+	        	
+	        	
+	        
 	        }
 		
 		}catch(IOException e){
